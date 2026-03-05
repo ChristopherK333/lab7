@@ -8,7 +8,7 @@ export default function PostGrid({ posts, onLike, onDislike }) {
     <div className="grid" id="posts">
       {posts.map((post) => (
         <PostCard
-            key={post.id} 
+            key={post.id} //if you pass a javascript variable you have to use curley braces, if you pass a string you can just use quotes
             post={post}
             onLike={onLike} 
             onDislike={onDislike}

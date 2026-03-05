@@ -23,7 +23,18 @@ export default function PostCard({ post, onLike, onDislike }) {
 
       <p className="cardBody">{excerpt(content)}</p>
 
-      {/* TODO (PostCard.jsx):
+      {
+      
+        <div className="actions">
+           <button type="button" onClick={() => onLike(id)}> 
+              Like <span className="count">{likes}</span>
+           </button>
+           <button type="button" onClick={() => onDislike(id)}> 
+              Dislike <span className="count">{dislikes}</span>
+           </button>
+        </div>
+      
+      /* TODO (PostCard.jsx):
           Add a like dislike action buttons block like this (like is compelte:
 
           <div className="actions">

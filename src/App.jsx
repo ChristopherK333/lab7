@@ -3,6 +3,10 @@ import Header from "./components/Header.jsx";
 import NewPostForm from "./components/NewPostForm.jsx";
 import PostGrid from "./components/PostGrid.jsx";
 
+
+//extra to do, go through this code and make sure you understand it
+
+
 function makeId() {
   // Generates unique IDs for posts.
   if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
@@ -25,7 +29,28 @@ export default class App extends React.Component {
       
       // Add some initial posts object so the page starts with content.
       // Use the post format described in the assignment.
-      posts: [
+      posts: [ {  
+        id: makeId(),
+        title: "Welcome to GridBlog",
+        author: "Instructor",
+        content:
+          "This mini blog is built with React class-based state. ",
+        createdAt: todayString(),
+        imageDataUrl: "",
+        likes: 2,
+        dislikes: 0,},
+
+{  
+        id: makeId(),
+        title: "Welcome to the Jungle, we have fun and games",
+        author: "Instructor 5",
+        content:
+          "Wanted to try making a post on this website. ",
+        createdAt: todayString(),
+        imageDataUrl: "",
+        likes: 4,
+        dislikes: 0,},
+
         // Example shape:
         // {
         //   id: makeId(),
@@ -137,7 +162,12 @@ export default class App extends React.Component {
       posts: prev.posts.map((p) => (p.id === id ? { ...p, likes: p.likes + 1 } : p)),
     }));
   };
-
+  dislikePost = (id) => {
+    this.setState((prev) => ({
+      //remember map is just looping through you could use for each here as well and it would work just fine.
+      posts: prev.posts.map((p) => (p.id=== id ? {...p, dislikes: p.dislikes +1}: p )),
+    }));
+  };
   // TODO (App.jsx):
   // Add dislikePost = (id) => { ... } using the same pattern as likePost.
   // It should increase dislikes by 1 for only the matching post.
@@ -151,10 +181,14 @@ export default class App extends React.Component {
 
     return (
       <div className="page">
-        {/* TODO (App.jsx):
+        {
+        <header totalPosts ={posts.length} totalLikes={totalLikes} totalDislikes={totalDislikes} />
+        
+        /* TODO (App.jsx):
             Render the header like this:
             <Header totalPosts={posts.length} totalLikes= __?__ totalDislikes=__?__/>
-        */}
+        */
+        }
 
         <div className="layout">
           <aside className="panel" id="about">
@@ -185,8 +219,11 @@ export default class App extends React.Component {
             <h2 className="panelTitle">Latest Posts</h2>
 
             {
-            <postGrid post />
-            
+   
+            <postGrid posts={posts}
+              onLike={this.likePost}
+              onDislike={this.dislikePost}
+            />
             /* TODO (App.jsx):
                 Render the PostGrid like this:
                 <PostGrid posts=__?__ onLike=__?__ onDislike={this.dislikePost} />
