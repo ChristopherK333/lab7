@@ -168,9 +168,6 @@ export default class App extends React.Component {
       posts: prev.posts.map((p) => (p.id=== id ? {...p, dislikes: p.dislikes +1}: p )),
     }));
   };
-  // TODO (App.jsx):
-  // Add dislikePost = (id) => { ... } using the same pattern as likePost.
-  // It should increase dislikes by 1 for only the matching post.
 
   render() {
     const { posts, form, error } = this.state;
@@ -181,14 +178,10 @@ export default class App extends React.Component {
 
     return (
       <div className="page">
-        {
-        <header totalPosts ={posts.length} totalLikes={totalLikes} totalDislikes={totalDislikes} />
         
-        /* TODO (App.jsx):
-            Render the header like this:
-            <Header totalPosts={posts.length} totalLikes= __?__ totalDislikes=__?__/>
-        */
-        }
+        <Header totalPosts ={posts.length} totalLikes={totalLikes} totalDislikes={totalDislikes} />
+        
+
 
         <div className="layout">
           <aside className="panel" id="about">
@@ -220,7 +213,7 @@ export default class App extends React.Component {
 
             {
    
-            <postGrid posts={posts}
+            <PostGrid posts={posts}
               onLike={this.likePost}
               onDislike={this.dislikePost}
             />
